@@ -1,7 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import { InventoryProvider } from './context/InventoryContext'
+import Carrito from './pages/Carrito'
+import DetalleArticulo from './pages/DetalleArticulo'
 import Home from './pages/Home'
+import IngresarArticulo from './pages/IngresarArticulo'
+import ListadoArticulos from './pages/ListadoArticulos'
 import PreguntasFrecuentes from './pages/PreguntasFrecuentes'
 import QuienesSomos from './pages/QuienesSomos'
 
@@ -14,6 +18,10 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="quienes-somos" element={<QuienesSomos />} />
             <Route path="preguntas-frecuentes" element={<PreguntasFrecuentes />} />
+            <Route path="ingresar" element={<IngresarArticulo />} />
+            <Route path="articulos" element={<ListadoArticulos />} />
+            <Route path="articulos/:id" element={<DetalleArticulo />} />
+            <Route path="carrito" element={<Carrito />} />
           </Route>
         </Routes>
       </InventoryProvider>

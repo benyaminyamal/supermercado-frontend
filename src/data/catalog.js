@@ -14,7 +14,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'leche-entera',
     nombre: 'Leche entera 1 L',
-    categoria: 'lacteos',
+    marca: 'Valle Sur',
+    tipo: 'lacteos',
     precio: 1290,
     stock: 48,
     minimo: 24,
@@ -24,7 +25,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'marraqueta',
     nombre: 'Marraqueta',
-    categoria: 'panaderia',
+    marca: 'Horno Vecino',
+    tipo: 'panaderia',
     precio: 1890,
     stock: 6,
     minimo: 8,
@@ -34,7 +36,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'palta-hass',
     nombre: 'Palta Hass',
-    categoria: 'frescos',
+    marca: 'Huerta Ñuñoa',
+    tipo: 'frescos',
     precio: 990,
     stock: 14,
     minimo: 20,
@@ -44,7 +47,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'arroz',
     nombre: 'Arroz grado 2, 1 kg',
-    categoria: 'abarrotes',
+    marca: 'Molino Alto',
+    tipo: 'abarrotes',
     precio: 1690,
     stock: 62,
     minimo: 20,
@@ -54,7 +58,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'trutro',
     nombre: 'Trutro de pollo',
-    categoria: 'carnes',
+    marca: 'Granja Luna',
+    tipo: 'carnes',
     precio: 3490,
     stock: 11,
     minimo: 8,
@@ -64,7 +69,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'agua',
     nombre: 'Agua mineral sin gas 1,6 L',
-    categoria: 'bebidas',
+    marca: 'Vertiente',
+    tipo: 'bebidas',
     precio: 890,
     stock: 3,
     minimo: 18,
@@ -74,7 +80,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'detergente',
     nombre: 'Detergente líquido 3 L',
-    categoria: 'limpieza',
+    marca: 'Sala Limpia',
+    tipo: 'limpieza',
     precio: 7990,
     stock: 9,
     minimo: 6,
@@ -84,7 +91,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'gauda',
     nombre: 'Queso gauda laminado 200 g',
-    categoria: 'lacteos',
+    marca: 'Valle Sur',
+    tipo: 'lacteos',
     precio: 3290,
     stock: 0,
     minimo: 10,
@@ -94,7 +102,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'tomate',
     nombre: 'Tomate larga vida',
-    categoria: 'frescos',
+    marca: 'Huerta Ñuñoa',
+    tipo: 'frescos',
     precio: 1490,
     stock: 22,
     minimo: 12,
@@ -104,7 +113,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'aceite',
     nombre: 'Aceite vegetal 1 L',
-    categoria: 'abarrotes',
+    marca: 'Molino Alto',
+    tipo: 'abarrotes',
     precio: 2790,
     stock: 31,
     minimo: 12,
@@ -114,7 +124,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'yogurt',
     nombre: 'Yogurt natural 125 g',
-    categoria: 'lacteos',
+    marca: 'Valle Sur',
+    tipo: 'lacteos',
     precio: 390,
     stock: 40,
     minimo: 24,
@@ -124,7 +135,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'cafe',
     nombre: 'Café molido 250 g',
-    categoria: 'abarrotes',
+    marca: 'Tostaduría Sur',
+    tipo: 'abarrotes',
     precio: 4990,
     stock: 7,
     minimo: 8,
@@ -134,7 +146,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'huevos',
     nombre: 'Huevos de gallina x12',
-    categoria: 'lacteos',
+    marca: 'Granja Luna',
+    tipo: 'lacteos',
     precio: 3990,
     stock: 18,
     minimo: 10,
@@ -144,7 +157,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'jabon',
     nombre: 'Jabón líquido para ropa 750 ml',
-    categoria: 'limpieza',
+    marca: 'Sala Limpia',
+    tipo: 'limpieza',
     precio: 2490,
     stock: 15,
     minimo: 8,
@@ -154,7 +168,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'fideos',
     nombre: 'Fideos espirales 400 g',
-    categoria: 'abarrotes',
+    marca: 'Molino Alto',
+    tipo: 'abarrotes',
     precio: 990,
     stock: 54,
     minimo: 16,
@@ -164,7 +179,8 @@ export const SEED_PRODUCTS = [
   {
     id: 'platano',
     nombre: 'Plátano',
-    categoria: 'frescos',
+    marca: 'Huerta Ñuñoa',
+    tipo: 'frescos',
     precio: 1190,
     stock: 27,
     minimo: 15,
@@ -174,9 +190,11 @@ export const SEED_PRODUCTS = [
 ]
 
 export function categoryById(id) {
-  return CATEGORIES.find((category) => category.id === id) ?? {
-    id: 'abarrotes',
-    label: 'Abarrotes',
-    tone: 'grain',
-  }
+  return (
+    CATEGORIES.find((category) => category.id === id) ?? {
+      id: 'abarrotes',
+      label: 'Abarrotes',
+      tone: 'grain',
+    }
+  )
 }

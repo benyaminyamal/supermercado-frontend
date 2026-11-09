@@ -29,7 +29,7 @@ const FAQS = [
     id: 'stock',
     question: '¿Cómo sé si queda stock de un producto?',
     answer:
-      'En Inicio, cada producto muestra su estado. “En sala” está sobre el mínimo. “Stock bajo” todavía se puede vender, pero ya hay que reponer. “Agotado” está en cero y no se ofrece en góndola ni en despacho.',
+      'En Inicio, cada producto muestra su estado. “En sala” está sobre el mínimo. “Stock bajo” todavía se puede vender, pero ya hay que reponer. “Agotado” está en cero y no se ofrece en góndola ni en despacho. La tabla de Artículos en inventario muestra el mismo estado.',
   },
   {
     id: 'ajuste',
@@ -47,7 +47,7 @@ const FAQS = [
     id: 'nuevo',
     question: '¿Cómo agrego un producto que acaba de entrar?',
     answer:
-      'En Inicio, usa “Agregar producto”. Completa nombre, categoría, precio, stock, mínimo, ubicación y unidad. Al guardar, queda al comienzo de la lista y entra en las alertas si el stock no supera el mínimo.',
+      'En el menú de inventario, abre Ingresar artículo. Completa nombre, marca, tipo de producto y los datos de sala. Al guardar, entra al listado y también al inicio. Si el stock no supera el mínimo, queda en alerta.',
   },
   {
     id: 'tarjeta',
@@ -61,39 +61,56 @@ export default function PreguntasFrecuentes() {
   const [openId, setOpenId] = useState(FAQS[0].id)
 
   return (
-    <div className="faq">
-      <div className="faq-intro">
-        <p className="lead">
-          Respuestas para comprar en Abasto y para usar el inventario de la Sala Ñuñoa. Si la duda
-          es de un producto puntual, el equipo de sala lo revisa en Inicio.
-        </p>
-        <p className="faq-aside">
-          Horario de caja: todos los días hasta el cierre de la sala. Consultas de pedido:
-          mesón de servicio, pasillo 1.
-        </p>
+    <div className="row g-3">
+      <div className="col-lg-8">
+        <div className="card shadow-sm">
+          <div className="card-body">
+            <p className="lead mb-0">
+              Respuestas para comprar en Abasto y para usar el inventario de la Sala Ñuñoa. Si la
+              duda es de un producto puntual, el equipo de sala lo revisa en Inicio.
+            </p>
+          </div>
+        </div>
       </div>
-
-      <div className="accordion">
-        {FAQS.map((item) => {
-          const open = openId === item.id
-          return (
-            <article key={item.id} className={open ? 'faq-item is-open' : 'faq-item'}>
-              <h2>
-                <button
-                  type="button"
-                  aria-expanded={open}
-                  aria-controls={`respuesta-${item.id}`}
-                  id={`pregunta-${item.id}`}
-                  onClick={() => setOpenId(open ? null : item.id)}
-                >
-                  {item.question}
-                  <span aria-hidden="true">{open ? '−' : '+'}</span>
-                </button>
-              </h2>
-              {open && <p id={`respuesta-${item.id}`}>{item.answer}</p>}
-            </article>
-          )
-        })}
+      <div className="col-lg-4">
+        <aside className="card shadow-sm h-100">
+          <div className="card-body">
+            <p className="mb-0 text-secondary">
+              Horario de caja: todos los días hasta el cierre de la sala. Consultas de pedido: mesón
+              de servicio, pasillo 1.
+            </p>
+          </div>
+        </aside>
+      </div>
+      <div className="col-12">
+        <div className="accordion shadow-sm">
+          {FAQS.map((item) => {
+            const open = openId === item.id
+            return (
+              <article className="accordion-item" key={item.id}>
+                <h2 className="accordion-header">
+                  <button
+                    type="button"
+                    className={`accordion-button${open ? '' : ' collapsed'}`}
+                    aria-expanded={open}
+                    aria-controls={`respuesta-${item.id}`}
+                    id={`pregunta-${item.id}`}
+                    onClick={() => setOpenId(open ? null : item.id)}
+                  >
+                    {item.question}
+                  </button>
+                </h2>
+                {open && (
+                  <div className="accordion-collapse show">
+                    <p className="accordion-body mb-0" id={`respuesta-${item.id}`}>
+                      {item.answer}
+                    </p>
+                  </div>
+                )}
+              </article>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import BottomNav from './BottomNav'
+import InventoryMenu from './InventoryMenu'
 
 const PAGES = {
   '/': {
@@ -15,39 +16,51 @@ const PAGES = {
     kicker: 'Ayuda',
     title: 'Preguntas frecuentes',
   },
+  '/ingresar': {
+    kicker: 'Sala Ñuñoa',
+    title: 'Ingresar artículo',
+  },
+  '/articulos': {
+    kicker: 'Sala Ñuñoa',
+    title: 'Artículos en inventario',
+  },
+  '/carrito': {
+    kicker: 'Sala Ñuñoa',
+    title: 'Carrito de compras',
+  },
+}
+
+function pageFor(pathname) {
+  if (pathname.startsWith('/articulos/') && pathname.length > '/articulos/'.length) {
+    return { kicker: 'Sala Ñuñoa', title: 'Detalle del artículo' }
+  }
+  return PAGES[pathname] ?? { kicker: 'Abasto', title: 'Supermercado' }
 }
 
 export default function Layout() {
   const { pathname } = useLocation()
-  const page = PAGES[pathname] ?? { kicker: 'Abasto', title: 'Supermercado' }
+  const page = pageFor(pathname)
 
   useEffect(() => {
     document.title = `${page.title} · Abasto`
   }, [page.title])
 
   return (
-    <div className="app">
-      <a className="skip" href="#contenido">
-        Saltar al contenido
-      </a>
-      <header className="topbar">
-        <div className="shell topbar-inner">
-          <div className="brand">
-            <span className="mark" aria-hidden="true">
-              <svg viewBox="0 0 32 32">
-                <path d="M6 12h20l-1.8 11.2a2.4 2.4 0 0 1-2.4 2H10.2a2.4 2.4 0 0 1-2.4-2L6 12z" />
-                <path d="M11 12c0-3.6 2.2-6 5-6s5 2.4 5 6" fill="none" />
-              </svg>
-            </span>
-            <div>
-              <p className="brand-name">Abasto</p>
-              <p className="brand-kicker">{page.kicker}</p>
-            </div>
+    <div className="app d-flex flex-column min-vh-100">
+      <header className="bg-success text-white">
+        <div className="container py-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
+          <p className="h4 mb-0">
+            <i className="bi bi-shop me-2" aria-hidden="true"></i>
+            Abasto
+          </p>
+          <div className="text-sm-end">
+            <p className="mb-0 small">{page.kicker}</p>
+            <h1 className="h4 mb-0">{page.title}</h1>
           </div>
-          <h1>{page.title}</h1>
         </div>
       </header>
-      <main id="contenido" className="shell page">
+      <InventoryMenu />
+      <main id="contenido" className="container page-wrap flex-grow-1">
         <Outlet />
       </main>
       <BottomNav />
